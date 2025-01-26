@@ -4,8 +4,8 @@ import { Route, HashRouter } from "@solidjs/router"
 import { QueryClientProvider } from "@tanstack/solid-query"
 import { query_client } from "./utils/query"
 
-import "virtual:uno.css"
 import "@unocss/reset/tailwind.css"
+import "virtual:uno.css"
 
 import { IndexPage } from "./pages"
 import { LoginPage } from "./pages/login"
