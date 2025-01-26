@@ -1,15 +1,15 @@
 import presetWind from "@unocss/preset-wind"
-import { defineConfig } from "unocss"
+import { defineConfig, presetAttributify } from "unocss"
 
 export default defineConfig({
-	// ...UnoCSS options
 	presets: [
+		presetAttributify({}),
 		presetWind(),
 	],
 	theme: {
 		colors: {
-			"c-bg": "var(--bg)",
-			"c-on-bg": "var(--on-bg)",
+			"c-surface": "var(--surface)",
+			"c-on-surface": "var(--on-surface)",
 			"c-root-color": "var(--root-color)",
 			"c-primary": "var(--primary)",
 			"c-on-primary": "var(--on-primary)",

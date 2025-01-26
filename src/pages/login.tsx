@@ -14,7 +14,7 @@ export function LoginPage()
 
 	return (
 		<div>
-			<h1 class="font-bold">
+			<h1 font="bold" >
 				Login to Reezer
 			</h1>
 
