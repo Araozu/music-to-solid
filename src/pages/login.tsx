@@ -6,7 +6,7 @@ export function LoginPage()
 {
 	async function onSubmit(ev: SubmitEvent)
 	{
-		fetch_api("/login", {
+		fetch_api("/auth/login", {
 			method: "post",
 		})
 		ev.preventDefault()

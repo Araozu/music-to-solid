@@ -12,6 +12,7 @@ export default defineConfig({
 			"c-on-surface": "var(--on-surface)",
 			"c-surface-variant": "var(--surface-variant)",
 			"c-on-surface-variant": "var(--on-surface-variant)",
+			"c-border-1": "var(--border-1)",
 
 			"c-root-color": "var(--root-color)",
 			"c-primary": "var(--primary)",

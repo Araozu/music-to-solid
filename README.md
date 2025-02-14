@@ -1,13 +1,10 @@
-# Reezer
+# MusicToGo
 
-Yet another rewrite of deemix, this time with:
+Now a regular SPA!
 
-- Rust in the backend
-    - Rocket.rs as server
-    - Swagger API docs
-- Solidjs in the frontend
-    - SPA mode
-    - Bun
-    - UnoCSS
-- Docker
+## Nginx proxy
+
+```sh
+docker run -p 8807:80 -v ./nginx.conf:/etc/nginx/nginx.conf:ro nginx
+```
 
