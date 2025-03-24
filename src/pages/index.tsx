@@ -2,7 +2,7 @@ import { A } from "@solidjs/router"
 import { Card } from "../components/card"
 import { createSignal, For, onMount } from "solid-js"
 import { fetch_api } from "../utils/query"
-import { AlbumCard } from "./index/AlbumCard"
+import { AlbumCard, AlbumCardSkeleton } from "./index/AlbumCard"
 
 export function IndexPage()
 {
@@ -33,7 +33,11 @@ export function IndexPage()
 				</h2>
 
 				<div id="random-albums" class="overflow-x-scroll whitespace-nowrap mt-2 flex gap-2 px-2 pb-3">
-					<For each={albums()}>
+					<For
+						each={albums()}
+						fallback={new Array(10).fill(0)
+							.map(() => (<AlbumCardSkeleton />))}
+					>
 						{(album) => (
 							<AlbumCard album={album} />
 						)}
