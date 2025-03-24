@@ -1,0 +1,14 @@
+:root {
+        --border-1: #333333;
+
+        --root-color: #F9A8D4;
+
+        --primary: #fbb1d8;
+        --on-primary: #511d3e;
+        --outline: #9c8d93;
+}
+
+html, body {
+	font-family: 'Atkinson Hyperlegible', sans-serif;
+}
+

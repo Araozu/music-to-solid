@@ -19,5 +19,9 @@ export default defineConfig({
 			"c-on-primary": "var(--on-primary)",
 			"c-outline": "var(--outline)",
 		},
+		fontFamily: {
+			"display": ["Poppins", "sans-serif"],
+			"body": ["'Atkinson Hyperlegible'", "sans-serif"],
+		},
 	},
 })

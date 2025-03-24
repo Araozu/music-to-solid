@@ -6,6 +6,7 @@ import { query_client } from "./utils/query"
 
 import "@unocss/reset/tailwind.css"
 import "virtual:uno.css"
+import "./index.css"
 
 import { IndexPage } from "./pages"
 import { LoginPage } from "./pages/login"

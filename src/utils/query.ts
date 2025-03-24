@@ -48,12 +48,30 @@ export async function fetch_api<Data>(url: string, options?: RequestInit)
 
 		}
 
-		const txt = await response.text()
+		let txt
+		try
+		{
+			txt = await response.text()
+		}
+		catch
+		{
+			// @ts-expect-error allowing null
+			return [null, null]
+		}
 
 		// @ts-expect-error allowing null
 		if (txt === "") return [null, null]
 
-		const json = JSON.parse(txt)
+		let json
+		try
+		{
+			json = JSON.parse(txt)
+		}
+		catch
+		{
+			// @ts-expect-error allowing null
+			return [txt, null]
+		}
 
 		return [json, null]
 	}
