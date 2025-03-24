@@ -20,7 +20,7 @@ export function AlbumCard(props: { album: Album })
 				</div>
 				<p>
 					<A
-						href={`/album/${props.album.id}`}
+						href={`/album/${props.album.id}?name=${encodeURIComponent(props.album.name)}`}
 						class="inline-block w-full overflow-hidden whitespace-nowrap overflow-ellipsis hover:underline"
 					>
 						{props.album.name}

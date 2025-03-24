@@ -10,6 +10,8 @@ import "./index.css"
 
 import { IndexPage } from "./pages"
 import { LoginPage } from "./pages/login"
+import { AlbumPage } from "./pages/album/AlbumPage"
+import { AlbumIdPage } from "./pages/album/id/AlbumIdPage"
 
 const root = document.getElementById("root")
 
@@ -23,6 +25,8 @@ render(() => (
 		<HashRouter>
 			<Route path="/" component={IndexPage} />
 			<Route path="/login" component={LoginPage} />
+			<Route path="/album" component={AlbumPage} />
+			<Route path="/album/:id" component={AlbumIdPage} />
 		</HashRouter>
 	</QueryClientProvider>
 ), root!)
