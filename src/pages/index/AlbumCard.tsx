@@ -1,7 +1,7 @@
 import { A } from "@solidjs/router"
-import { Album } from ".."
 import { backend_host } from "../../utils/query"
 import { createSignal } from "solid-js"
+import { Album } from "../../utils/types"
 
 export function AlbumCard(props: { album: Album })
 {

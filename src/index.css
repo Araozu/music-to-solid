@@ -1,4 +1,6 @@
 :root {
+        --surface-variant: #27272a;
+        --on-surface-variant: white;
         --border-1: #333333;
 
         --root-color: #F9A8D4;

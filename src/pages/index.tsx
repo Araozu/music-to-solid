@@ -3,6 +3,7 @@ import { Card } from "../components/card"
 import { createSignal, For, onMount } from "solid-js"
 import { fetch_api } from "../utils/query"
 import { AlbumCard, AlbumCardSkeleton } from "./index/AlbumCard"
+import { Album } from "../utils/types"
 
 export function IndexPage()
 {
@@ -67,46 +68,5 @@ function Navbar()
 			</A>
 		</nav>
 	)
-}
-
-export interface Album {
-	playCount: number
-	playDate: string
-	rating: number
-	starred: boolean
-	starredAt: string
-	id: string
-	name: string
-	embedArtPath: string
-	artistId: string
-	artist: string
-	albumArtistId: string
-	albumArtist: string
-	allArtistIds: string
-	maxYear: number
-	minYear: number
-	compilation: boolean
-	songCount: number
-	duration: number
-	size: number
-	genre: string
-	genres: Genre[]
-	fullText: string
-	orderAlbumName: string
-	orderAlbumArtistName: string
-	imageFiles: string
-	paths: string
-	smallImageUrl: string
-	mediumImageUrl: string
-	largeImageUrl: string
-	externalUrl: string
-	externalInfoUpdatedAt: string
-	createdAt: string
-	updatedAt: string
-}
-
-export interface Genre {
-	id: string
-	name: string
 }
 
