@@ -1,16 +1,21 @@
 import { A } from "@solidjs/router"
 import { Album } from ".."
 import { backend_host } from "../../utils/query"
+import { createSignal } from "solid-js"
 
 export function AlbumCard(props: { album: Album })
 {
+	const [imgLoaded, setImgLoaded] = createSignal(false)
+	const imgOpacity = () => (imgLoaded() ? "opacity-100" : "opacity-0")
+
 	return (
 		<div class="inline-block p-1 rounded bg-zinc-800">
 			<div class="h-40 w-28 relative">
 				<div class="text-center">
 					<img
-						class="inline-block w-[6.75rem] h-[6.75rem] min-h-26 overflow-hidden rounded"
+						class={`inline-block w-[6.75rem] h-[6.75rem] min-h-26 overflow-hidden rounded transition-opacity ${imgOpacity()}`}
 						src={`${backend_host}/covers/${props.album.id}`}
+						onLoad={() => setImgLoaded(true)}
 					/>
 				</div>
 				<p>
