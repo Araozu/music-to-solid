@@ -1,7 +1,8 @@
 import { QueryClient } from "@tanstack/solid-query"
 import { Result } from "./result"
 
-const backend_url = import.meta.env.VITE_BACKEND_URL
+export const backend_host = import.meta.env.VITE_BACKEND_HOST
+export const backend_url = `${backend_host}/api`
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type FetchError<T = any> = {

@@ -2,6 +2,7 @@ import { A } from "@solidjs/router"
 import { Card } from "../components/card"
 import { createSignal, For, onMount } from "solid-js"
 import { fetch_api } from "../utils/query"
+import { AlbumCard } from "./index/AlbumCard"
 
 export function IndexPage()
 {
@@ -14,6 +15,7 @@ export function IndexPage()
 		{
 			console.error(err)
 			console.error(err.error)
+			return
 		}
 
 		setAlbums(data)
@@ -22,27 +24,21 @@ export function IndexPage()
 	return (
 		<div>
 			<Navbar />
-			<div class="m-1">
-				<Card>
-					<div>
-						<h2
-							class="text-lg"
-							font="display medium"
-						>
-							Random Albums
-						</h2>
-					</div>
+			<div border="b-1 c-border-1">
+				<h2
+					class="text-lg px-2 my-4 mb-2"
+					font="display medium"
+				>
+					Random Albums
+				</h2>
 
-					<div>
-						<For each={albums()}>
-							{(album) => (
-								<p>
-									{album.name}
-								</p>
-							)}
-						</For>
-					</div>
-				</Card>
+				<div id="random-albums" class="overflow-x-scroll whitespace-nowrap mt-2 flex gap-2 px-2 pb-3">
+					<For each={albums()}>
+						{(album) => (
+							<AlbumCard album={album} />
+						)}
+					</For>
+				</div>
 			</div>
 			<div class="m-1">
 				<Card>
