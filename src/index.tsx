@@ -12,6 +12,7 @@ import { IndexPage } from "./pages"
 import { LoginPage } from "./pages/login"
 import { AlbumPage } from "./pages/album/AlbumPage"
 import { AlbumIdPage } from "./pages/album/id/AlbumIdPage"
+import { Player } from "./components/Player"
 
 const root = document.getElementById("root")
 
@@ -28,5 +29,7 @@ render(() => (
 			<Route path="/album" component={AlbumPage} />
 			<Route path="/album/:id" component={AlbumIdPage} />
 		</HashRouter>
+		<div class="h-16 w-full" />
+		<Player />
 	</QueryClientProvider>
 ), root!)
