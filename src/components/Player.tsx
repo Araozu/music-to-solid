@@ -1,14 +1,16 @@
 import { Howl } from "howler"
 import { Pause, Play, SkipForward } from "phosphor-solid"
-import { createMemo, createSignal, onCleanup, onMount, Show } from "solid-js"
+import { createEffect, createMemo, createSignal, onCleanup, onMount, Show } from "solid-js"
 import { Song } from "../utils/types"
 import { backend_host } from "../utils/query"
+import { FullScreenPlayer } from "./FullScreenPlayer"
 
 export function Player()
 {
 	const [queue, setQueue] = createSignal<Song[]>([])
 	const [idx, setIdx] = createSignal(0)
 	const [loading, setLoading] = createSignal(false)
+	const [openFullScreen, setOpenFullScreen] = createSignal(false)
 
 	const currentSong = createMemo(() =>
 	{
@@ -28,6 +30,17 @@ export function Player()
 		const song = currentSong()
 		if (song === null) return ""
 		return `${backend_host}/covers/${song.albumId}`
+	})
+	createEffect(() =>
+	{
+		if (openFullScreen())
+		{
+			document.body.style.overflow = "hidden"
+		}
+		else
+		{
+			document.body.style.overflow = "auto"
+		}
 	})
 
 	let currentSound: Howl | null = null
@@ -92,64 +105,78 @@ export function Player()
 
 	onCleanup(() =>
 	{
-		console.log("cleanup :D")
+		currentSound?.stop()
+		currentSound?.unload()
 	})
 
 	return (
-		<div
-			class="fixed bottom-0 bg-c-surface text-c-on-surface w-vw grid grid-cols-[3.5rem_auto_3rem_3rem] h-14 items-center"
-			border="t-2 c-border-1"
-		>
-			<div class="flex justify-center items-center">
-				<div
-					class="inline-block h-12 w-12 bg-sky-200 dark:bg-sky-700 rounded"
-				>
-					<img class="rounded" id="music-player-img" src={imgUrl()} />
-				</div>
-			</div>
-			<div class="px-1">
-				<p
-					class="font-display overflow-hidden overflow-ellipsis whitespace-nowrap w-full"
-				>
-					{currentSong()?.title ?? "-"}
-				</p>
-				<p
-					class="text-sm opacity-75 overflow-hidden overflow-ellipsis whitespace-nowrap w-full"
-				>
-					{currentSong()?.artist ?? "-"}
-				</p>
-			</div>
-			<Show when={!playing()}>
-				<button
-					class="flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed h-14"
-					onClick={() =>
-					{
-						currentSound?.play()
-						setPlaying(true)
-					}}
-				>
-					<Play size={28} weight="fill" />
-				</button>
-			</Show>
-			<Show when={playing()}>
-				<button
-					class="flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed h-14"
-					onClick={() =>
-					{
-						currentSound?.pause()
-						setPlaying(false)
-					}}
-				>
-					<Pause size={28} weight="fill" />
-				</button>
-			</Show>
-			<button
-				class="flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed h-14"
-				disabled={!hasNext()}
-				onClick={() => next()}
+		<>
+			<div
+				class="fixed bottom-0 bg-c-surface text-c-on-surface w-vw grid grid-cols-[3.5rem_auto_3rem_3rem] h-14 items-center"
+				border="t-2 c-border-1"
 			>
-				<SkipForward size={28} weight="fill" />
-			</button>
-		</div>
+				<div class="flex justify-center items-center">
+					<div
+						class="inline-block h-12 w-12 bg-sky-200 dark:bg-sky-700 rounded"
+					>
+						<img class="rounded" id="music-player-img" src={imgUrl()} />
+					</div>
+				</div>
+				<div
+					class="px-1"
+					onClick={() =>
+					{
+						if (currentSong() === null) return
+
+						setOpenFullScreen(true)
+					}}
+				>
+					<p
+						class="font-display overflow-hidden overflow-ellipsis whitespace-nowrap w-full"
+					>
+						{currentSong()?.title ?? "-"}
+					</p>
+					<p
+						class="text-sm opacity-75 overflow-hidden overflow-ellipsis whitespace-nowrap w-full"
+					>
+						{currentSong()?.artist ?? "-"}
+					</p>
+				</div>
+				<Show when={!playing()}>
+					<button
+						class="flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed h-14"
+						onClick={() =>
+						{
+							currentSound?.play()
+							setPlaying(true)
+						}}
+					>
+						<Play size={28} weight="fill" />
+					</button>
+				</Show>
+				<Show when={playing()}>
+					<button
+						class="flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed h-14"
+						onClick={() =>
+						{
+							currentSound?.pause()
+							setPlaying(false)
+						}}
+					>
+						<Pause size={28} weight="fill" />
+					</button>
+				</Show>
+				<button
+					class="flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed h-14"
+					disabled={!hasNext()}
+					onClick={() => next()}
+				>
+					<SkipForward size={28} weight="fill" />
+				</button>
+			</div>
+			<Show when={openFullScreen()}>
+				<FullScreenPlayer song={currentSong()!} />
+			</Show>
+		</>
 	)
 }
