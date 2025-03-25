@@ -75,13 +75,19 @@ export function AlbumIdPage()
 								Disc {discName}
 							</p>
 							<For each={songs}>
-								{(song) => (
-									<p class="px-2 py-2">
+								{(song, idx) => (
+									<button class="px-2 py-2 inline-block w-full text-left"
+										onClick={() =>
+										{
+											const playEvent = new CustomEvent("queue_and_play", { detail: { queue: songs, idx } })
+											window.dispatchEvent(playEvent)
+										}}
+									>
 										<span class="opacity-75">
 											{song.trackNumber} -&nbsp;
 										</span>
 										{song.title}
-									</p>
+									</button>
 								)}
 							</For>
 						</div>
